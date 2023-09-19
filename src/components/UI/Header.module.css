@@ -1,0 +1,5 @@
+.header {
+    background: url("/assets/images/bg-sidebar-mobile.svg") no-repeat;
+    min-height: 172px;
+    background-size: cover;
+}
