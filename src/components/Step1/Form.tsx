@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { stepsContext } from "../../context/StepsContextProvider";
+
 export function Form() {
+    const context = useContext(stepsContext);
     return (
-        <>
+        <div className={`${context.index !== 0 ? "hidden" : ""}`}>
             <h1 className="text-marine-blue text-[2rem] font-bold mb-3">
                 Personal info
             </h1>
@@ -55,6 +59,6 @@ export function Form() {
                 </div>
                 <button className="hidden" type="submit"></button>
             </form>
-        </>
+        </div>
     );
 }
