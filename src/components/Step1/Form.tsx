@@ -23,6 +23,7 @@ export function Form() {
                         className="p-sm border border-cool-gray/50 rounded-md"
                         type="text"
                         name="name"
+                        autoComplete="name"
                         id="name"
                         placeholder="e.g. Stephen King"
                     />
@@ -38,6 +39,7 @@ export function Form() {
                         className="p-sm border border-cool-gray/50 rounded-md"
                         type="email"
                         name="email"
+                        autoComplete="email"
                         id="email"
                         placeholder="e.g. stephenking@lorem.com"
                     />
@@ -53,6 +55,7 @@ export function Form() {
                         className="p-sm border border-cool-gray/50 rounded-md"
                         type="tel"
                         name="phone"
+                        autoComplete="phone"
                         id="phone"
                         placeholder="e.g. +1 234 567 890"
                     />

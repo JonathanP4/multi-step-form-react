@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { RangeInput } from "../UI/RangeInput";
 import { planContext } from "../../context/PlanContextProvider";
 
-export function PlanType() {
-    const plan = useContext(planContext);
+export function PlanBilling() {
+    const { plan } = useContext(planContext);
 
     return (
         <div className="flex justify-center gap-5 py-sm bg-purplish-blue/5">
             <span
                 className={`text-[13px] font-medium ${
-                    plan.planType === "MONTHLY"
+                    plan.billing === "MONTHLY"
                         ? "text-marine-blue"
                         : "text-cool-gray"
                 }`}
@@ -22,7 +22,7 @@ export function PlanType() {
             />
             <span
                 className={`text-[13px] font-medium ${
-                    plan.planType === "ANNUALY"
+                    plan.billing === "ANNUALY"
                         ? "text-marine-blue"
                         : "text-cool-gray"
                 }`}

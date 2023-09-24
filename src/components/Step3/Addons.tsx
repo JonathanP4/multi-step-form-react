@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { stepsContext } from "../../context/StepsContextProvider";
 import { planContext } from "../../context/PlanContextProvider";
 
 export function Addons() {
     const context = useContext(stepsContext);
-    const plan = useContext(planContext);
+    const { plan, setAddons } = useContext(planContext);
 
-    const [onlineService, setOnlineService] = useState(true);
-    const [largerStorage, setLargerStorage] = useState(false);
-    const [customProfile, setCustomProfile] = useState(false);
+    function addonHandler(addon: Addons) {
+        setAddons(addon);
+    }
 
     return (
         <div className={`${context.index !== 2 ? "hidden" : ""}`}>
@@ -20,16 +20,16 @@ export function Addons() {
             </p>
             <div className="grid gap-sm leading-none">
                 <div
-                    onClick={() => setOnlineService((state) => !state)}
+                    onClick={() => addonHandler("ONLINE")}
                     className={`flex items-center gap-5 p-sm border border-cool-gray/50 rounded transition-all ease-linear cursor-pointer ${
-                        onlineService
+                        plan.addons.includes("ONLINE")
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
                 >
                     <input
                         readOnly
-                        checked={onlineService}
+                        checked={plan.addons.includes("ONLINE")}
                         type="checkbox"
                         name="online_service"
                     />
@@ -40,21 +40,21 @@ export function Addons() {
                         </span>
                     </div>
                     <span className="text-sm text-purplish-blue">
-                        {plan.planType === "MONTHLY" ? "+$1/mo" : "+$10/yr"}
+                        {plan.billing === "MONTHLY" ? "+$1/mo" : "+$10/yr"}
                     </span>
                 </div>
 
                 <div
-                    onClick={() => setLargerStorage((state) => !state)}
+                    onClick={() => addonHandler("STORAGE")}
                     className={`flex items-center gap-5 p-sm border border-cool-gray/50 rounded transition-all ease-linear cursor-pointer ${
-                        largerStorage
+                        plan.addons.includes("STORAGE")
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
                 >
                     <input
                         readOnly
-                        checked={largerStorage}
+                        checked={plan.addons.includes("STORAGE")}
                         type="checkbox"
                         name="larger_storage"
                     />
@@ -65,21 +65,21 @@ export function Addons() {
                         </span>
                     </div>
                     <span className="text-sm text-purplish-blue">
-                        {plan.planType === "MONTHLY" ? "+$2/mo" : "+$20/yr"}
+                        {plan.billing === "MONTHLY" ? "+$2/mo" : "+$20/yr"}
                     </span>
                 </div>
 
                 <div
-                    onClick={() => setCustomProfile((state) => !state)}
+                    onClick={() => addonHandler("PROFILE")}
                     className={`flex items-center gap-5 p-sm border border-cool-gray/50 rounded transition-all ease-linear cursor-pointer ${
-                        customProfile
+                        plan.addons.includes("PROFILE")
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
                 >
                     <input
                         readOnly
-                        checked={customProfile}
+                        checked={plan.addons.includes("PROFILE")}
                         type="checkbox"
                         name="custom_profile"
                     />
@@ -90,7 +90,7 @@ export function Addons() {
                         </span>
                     </div>
                     <span className="text-sm text-purplish-blue">
-                        {plan.planType === "MONTHLY" ? "+$2/mo" : "+$20/yr"}
+                        {plan.billing === "MONTHLY" ? "+$2/mo" : "+$20/yr"}
                     </span>
                 </div>
             </div>

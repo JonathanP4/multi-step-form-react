@@ -1,15 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { stepsContext } from "../../context/StepsContextProvider";
-import { PlanType } from "./PlanType";
+import { PlanBilling } from "./PlanBilling";
 import { planContext } from "../../context/PlanContextProvider";
-
-type Plans = "ARCADE" | "ADVANCED" | "PRO";
 
 export function Plan() {
     const step = useContext(stepsContext);
-    const plan = useContext(planContext);
+    const { plan, setPlan } = useContext(planContext);
 
-    const [plans, setPlan] = useState<Plans>("ARCADE");
+    function planHandler(addon: Plan) {
+        setPlan({ type: addon });
+    }
 
     return (
         <div className={`${step.index !== 1 ? "hidden" : ""}`}>
@@ -21,9 +21,9 @@ export function Plan() {
             </p>
             <div className="grid gap-sm">
                 <div
-                    onClick={() => setPlan("ARCADE")}
+                    onClick={() => planHandler("ARCADE")}
                     className={`p-sm flex items-center border border-cool-gray/50 rounded gap-[0.625rem] transition-all ease-linear cursor-pointer ${
-                        plans === "ARCADE"
+                        plan.type === "ARCADE"
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
@@ -34,17 +34,17 @@ export function Plan() {
                     />
                     <span className="text-sm">Arcade</span>
                     <span className="text-xs text-cool-gray">
-                        {plan.planType === "MONTHLY" ? "$9/mo" : "$90/yr"}
+                        {plan.billing === "MONTHLY" ? "$9/mo" : "$90/yr"}
                     </span>
-                    {plan.planType === "ANNUALY" && (
+                    {plan.billing === "ANNUALY" && (
                         <span className="text-[10px]">2 Months free</span>
                     )}
                 </div>
 
                 <div
-                    onClick={() => setPlan("ADVANCED")}
+                    onClick={() => planHandler("ADVANCED")}
                     className={`p-sm flex items-center border border-cool-gray/50 rounded gap-[0.625rem] transition-all ease-linear cursor-pointer ${
-                        plans === "ADVANCED"
+                        plan.type === "ADVANCED"
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
@@ -55,17 +55,17 @@ export function Plan() {
                     />
                     <span className="text-sm">Advanced</span>
                     <span className="text-xs text-cool-gray">
-                        {plan.planType === "MONTHLY" ? "$12/mo" : "$120/yr"}
+                        {plan.billing === "MONTHLY" ? "$12/mo" : "$120/yr"}
                     </span>
-                    {plan.planType === "ANNUALY" && (
+                    {plan.billing === "ANNUALY" && (
                         <span className="text-[10px]">2 Months free</span>
                     )}
                 </div>
 
                 <div
-                    onClick={() => setPlan("PRO")}
+                    onClick={() => planHandler("PRO")}
                     className={`p-sm flex items-center border border-cool-gray/50 rounded gap-[0.625rem] transition-all ease-linear cursor-pointer ${
-                        plans === "PRO"
+                        plan.type === "PRO"
                             ? "bg-purplish-blue/5 border-purplish-blue"
                             : "hover:border-purplish-blue/70"
                     }`}
@@ -73,14 +73,14 @@ export function Plan() {
                     <img src="/assets/images/icon-pro.svg" alt="arcade plan" />
                     <span className="text-sm">Pro</span>
                     <span className="text-xs text-cool-gray">
-                        {plan.planType === "MONTHLY" ? "$15/mo" : "$150/yr"}
+                        {plan.billing === "MONTHLY" ? "$15/mo" : "$150/yr"}
                     </span>
-                    {plan.planType === "ANNUALY" && (
+                    {plan.billing === "ANNUALY" && (
                         <span className="text-[10px]">2 Months free</span>
                     )}
                 </div>
             </div>
-            <PlanType />
+            <PlanBilling />
         </div>
     );
 }

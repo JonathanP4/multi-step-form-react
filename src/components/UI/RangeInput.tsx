@@ -7,11 +7,13 @@ interface RangeInputProps {
 }
 
 export function RangeInput({ sliderClass, thumbClass }: RangeInputProps) {
-    const plan = useContext(planContext);
+    const { setPlan } = useContext(planContext);
     const [state, setState] = useState(false);
 
     useEffect(() => {
-        state ? plan.setPlanType("ANNUALY") : plan.setPlanType("MONTHLY");
+        state
+            ? setPlan({ billing: "ANNUALY" })
+            : setPlan({ billing: "MONTHLY" });
     }, [state]);
 
     return (
