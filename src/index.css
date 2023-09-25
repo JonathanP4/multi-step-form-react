@@ -10,6 +10,14 @@ button {
     font-family: inherit;
 }
 
-* {
+/* * {
     transition: all 150ms;
+} */
+
+@media (min-width: 1024px) {
+    body {
+        display: grid;
+        place-content: center;
+        height: 100svh;
+    }
 }

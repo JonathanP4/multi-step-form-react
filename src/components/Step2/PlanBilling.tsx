@@ -6,7 +6,7 @@ export function PlanBilling() {
     const { plan } = useContext(planContext);
 
     return (
-        <div className="flex justify-center gap-5 py-sm bg-purplish-blue/5">
+        <div className="flex justify-center gap-5 py-sm bg-purplish-blue/5 mt-8">
             <span
                 className={`text-[13px] font-medium ${
                     plan.billing === "MONTHLY"
