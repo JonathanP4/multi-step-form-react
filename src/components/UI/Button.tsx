@@ -1,5 +1,6 @@
 import { ReactNode, useContext } from "react";
 import { stepsContext } from "../../context/StepsContextProvider";
+import { formContext } from "../../context/FormContextProvider";
 
 interface ButtonProps {
     children: ReactNode;
@@ -15,6 +16,7 @@ export default function Button({
     forwards = true,
 }: ButtonProps) {
     const step = useContext(stepsContext);
+    const validity = useContext(formContext);
 
     function setIndex() {
         if (forwards) {
@@ -27,9 +29,12 @@ export default function Button({
     return (
         <>
             <button
+                disabled={!validity.formIsValid}
                 onClick={setIndex}
                 type={type || "button"}
-                className={className}
+                className={`${className} ${
+                    !validity.formIsValid ? "opacity-80" : ""
+                }`}
             >
                 {children}
             </button>

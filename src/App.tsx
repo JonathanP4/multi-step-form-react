@@ -8,21 +8,24 @@ import { Plan } from "./components/Step2/Plan";
 import { Addons } from "./components/Step3/Addons";
 import { Finish } from "./components/Step4/Finish";
 import { PlanContextProvider } from "./context/PlanContextProvider";
+import { FormContextProvider } from "./context/FormContextProvider";
 
 function App() {
     return (
-        <StepsContextProvider>
-            <PlanContextProvider>
-                <Sidebar className="grid justify-center items-start pt-md lg:hidden" />
-                <Card>
-                    <Form />
-                    <Plan />
-                    <Addons />
-                    <Finish />
-                </Card>
-                <ChangeStep className="bg-white flex justify-between p-sm fixed bottom-0 w-full lg:hidden" />
-            </PlanContextProvider>
-        </StepsContextProvider>
+        <FormContextProvider>
+            <StepsContextProvider>
+                <PlanContextProvider>
+                    <Sidebar className="grid justify-center items-start pt-md lg:hidden" />
+                    <Card>
+                        <Form />
+                        <Plan />
+                        <Addons />
+                        <Finish />
+                    </Card>
+                    <ChangeStep className="bg-white flex justify-between p-sm fixed bottom-0 w-full lg:hidden" />
+                </PlanContextProvider>
+            </StepsContextProvider>
+        </FormContextProvider>
     );
 }
 
