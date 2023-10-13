@@ -5,6 +5,7 @@ import { stepsContext } from "../../context/StepsContextProvider";
 export function Form() {
     const step = useContext(stepsContext);
     const validity = useContext(formContext);
+
     const [nameTouched, setNameTouched] = useState(false);
     const [emailTouched, setEmailTouched] = useState(false);
     const [phoneTouched, setPhoneTouched] = useState(false);
@@ -19,15 +20,24 @@ export function Form() {
             </p>
             <form onSubmit={(e) => e.preventDefault()} className="grid gap-sm">
                 <div className="grid">
-                    <label
-                        className="text-marine-blue text-sm mb-1"
-                        htmlFor="name"
-                    >
-                        Name
-                    </label>
+                    <div className="flex items-center justify-between">
+                        <label
+                            className="text-marine-blue text-sm mb-1"
+                            htmlFor="name"
+                        >
+                            Name
+                        </label>
+                        <span className="text-red-500 text-sm">
+                            {!validity.nameIsValid && nameTouched
+                                ? "Invalid input"
+                                : ""}
+                        </span>
+                    </div>
                     <input
-                        onClick={() => setNameTouched(true)}
-                        onBlur={(e) => validity.isName(e.target.value)}
+                        onBlur={(e) => {
+                            validity.isName(e.target.value);
+                            setNameTouched(true);
+                        }}
                         required
                         className={`p-sm border rounded-md ${
                             !validity.nameIsValid && nameTouched
@@ -42,15 +52,24 @@ export function Form() {
                     />
                 </div>
                 <div className="grid">
-                    <label
-                        className="text-marine-blue text-sm "
-                        htmlFor="email"
-                    >
-                        Email Address
-                    </label>
+                    <div className="flex items-center justify-between">
+                        <label
+                            className="text-marine-blue text-sm "
+                            htmlFor="email"
+                        >
+                            Email Address
+                        </label>
+                        <span className="text-red-500 text-sm">
+                            {!validity.emailIsValid && emailTouched
+                                ? "Invalid input"
+                                : ""}
+                        </span>
+                    </div>
                     <input
-                        onClick={() => setEmailTouched(true)}
-                        onBlur={(e) => validity.isEmail(e.target.value)}
+                        onBlur={(e) => {
+                            validity.isEmail(e.target.value);
+                            setEmailTouched(true);
+                        }}
                         required
                         className={`p-sm border rounded-md ${
                             !validity.emailIsValid && emailTouched
@@ -65,16 +84,25 @@ export function Form() {
                     />
                 </div>
                 <div className="grid">
-                    <label
-                        className="text-marine-blue text-sm "
-                        htmlFor="phone"
-                    >
-                        Phone Number
-                    </label>
+                    <div className="flex items-center justify-between">
+                        <label
+                            className="text-marine-blue text-sm "
+                            htmlFor="phone"
+                        >
+                            Phone Number
+                        </label>
+                        <span className="text-red-500 text-sm">
+                            {!validity.phoneIsValid && phoneTouched
+                                ? "Invalid input"
+                                : ""}
+                        </span>
+                    </div>
                     <input
-                        onClick={() => setPhoneTouched(true)}
                         maxLength={14}
-                        onBlur={(e) => validity.isPhone(e.target.value)}
+                        onBlur={(e) => {
+                            validity.isPhone(e.target.value);
+                            setPhoneTouched(true);
+                        }}
                         className={`p-sm border rounded-md ${
                             !validity.phoneIsValid && phoneTouched
                                 ? "border-red-500"
