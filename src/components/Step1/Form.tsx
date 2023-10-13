@@ -83,7 +83,7 @@ export function Form() {
                         required
                         type="tel"
                         name="phone"
-                        autoComplete="phone"
+                        autoComplete="tel"
                         id="phone"
                         placeholder="e.g. +1 234 567 890"
                     />
